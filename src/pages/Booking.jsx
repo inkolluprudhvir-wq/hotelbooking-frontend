@@ -13,15 +13,25 @@ function getToday() {
   return `${year}-${month}-${day}`;
 }
 
+// Calculate available rooms for selected dates
 function calculateAvailableRooms(totalRooms, bookings, checkIn, checkOut) {
   const bookedRooms = bookings
     .filter((booking) => {
       if (booking.status === "cancelled") return false;
-      return booking.checkIn < checkOut && booking.checkOut > checkIn;
-    })
-    .reduce((total, booking) => total + Number(booking.rooms || 1), 0);
 
-  return Math.max(0, Number(totalRooms || 0) - bookedRooms);
+      return (
+        booking.checkIn < checkOut &&
+        booking.checkOut > checkIn
+      );
+    })
+    .reduce((total, booking) => {
+      return total + Number(booking.rooms || 1);
+    }, 0);
+
+  return Math.max(
+    0,
+    Number(totalRooms || 0) - bookedRooms
+  );
 }
 
 function Booking() {
@@ -29,6 +39,7 @@ function Booking() {
   const navigate = useNavigate();
 
   const [hotel, setHotel] = useState(null);
+
   const [name, setName] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -36,28 +47,48 @@ function Booking() {
   const [rooms, setRooms] = useState("1");
 
   const [availableRooms, setAvailableRooms] = useState(null);
+
   const [checkingAvailability, setCheckingAvailability] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+
   const [error, setError] = useState("");
 
+  // Fetch hotel details
   useEffect(() => {
+    let active = true;
+
     async function fetchHotel() {
       try {
         setLoading(true);
+        setError("");
+
         const response = await api.get(`/hotels/${id}`);
-        setHotel(response.data);
+
+        if (active) {
+          setHotel(response.data);
+        }
       } catch (err) {
-        console.error(err);
-        setError("Unable to load hotel information.");
+        console.error("Hotel loading error:", err);
+
+        if (active) {
+          setError("Unable to load hotel information.");
+        }
       } finally {
-        setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       }
     }
 
     fetchHotel();
+
+    return () => {
+      active = false;
+    };
   }, [id]);
 
+  // Check room availability
   useEffect(() => {
     if (!hotel || !checkIn || !checkOut || checkOut <= checkIn) {
       setAvailableRooms(null);
@@ -73,22 +104,31 @@ function Booking() {
 
         const response = await api.get(`/bookings?hotelId=${id}`);
 
+        const bookings = Array.isArray(response.data)
+          ? response.data
+          : [];
+
         const available = calculateAvailableRooms(
           hotel.rooms,
-          response.data,
+          bookings,
           checkIn,
           checkOut
         );
 
-        if (active) setAvailableRooms(available);
+        if (active) {
+          setAvailableRooms(available);
+        }
       } catch (err) {
-        console.error(err);
+        console.error("Availability error:", err);
+
         if (active) {
           setAvailableRooms(null);
           setError("Unable to check room availability. Try again.");
         }
       } finally {
-        if (active) setCheckingAvailability(false);
+        if (active) {
+          setCheckingAvailability(false);
+        }
       }
     }
 
@@ -99,6 +139,7 @@ function Booking() {
     };
   }, [hotel, id, checkIn, checkOut]);
 
+  // Confirm booking
   async function handleBooking(e) {
     e.preventDefault();
     setError("");
@@ -109,7 +150,7 @@ function Booking() {
     }
 
     if (!name.trim()) {
-      setError("Please enter your name.");
+      setError("Please enter your full name.");
       return;
     }
 
@@ -136,26 +177,33 @@ function Booking() {
     try {
       setSubmitting(true);
 
+      // Recheck availability before booking
       const response = await api.get(`/bookings?hotelId=${id}`);
+
+      const bookings = Array.isArray(response.data)
+        ? response.data
+        : [];
 
       const latestAvailable = calculateAvailableRooms(
         hotel.rooms,
-        response.data,
+        bookings,
         checkIn,
         checkOut
       );
 
       if (Number(rooms) > latestAvailable) {
         setAvailableRooms(latestAvailable);
+
         setError(
           latestAvailable === 0
             ? "Sorry! No rooms are available for these dates."
             : `Only ${latestAvailable} room(s) available for these dates.`
         );
+
         return;
       }
 
-      await api.post("/bookings", {
+      const bookingData = {
         hotelId: id,
         hotelName: hotel.name,
         name: name.trim(),
@@ -165,22 +213,33 @@ function Booking() {
         rooms: Number(rooms),
         status: "confirmed",
         createdAt: new Date().toISOString()
-      });
+      };
+
+      await api.post("/bookings", bookingData);
 
       alert("Booking Successful!");
+
       navigate("/mybookings");
+
     } catch (err) {
       console.error("Booking error:", err);
+
       setError("Booking failed. Please try again.");
     } finally {
       setSubmitting(false);
     }
   }
 
+  // Loading screen
   if (loading) {
-    return <div className="booking-message">Loading hotel...</div>;
+    return (
+      <div className="booking-message">
+        Loading hotel...
+      </div>
+    );
   }
 
+  // Hotel not found
   if (!hotel) {
     return (
       <div className="booking-message">
@@ -189,7 +248,8 @@ function Booking() {
     );
   }
 
-  const invalidDates = checkIn && checkOut && checkOut <= checkIn;
+  const invalidDates =
+    checkIn && checkOut && checkOut <= checkIn;
 
   const cannotBook =
     submitting ||
@@ -200,15 +260,25 @@ function Booking() {
 
   return (
     <div className="booking-page">
+
       <div className="booking-container">
 
+        {/* Header */}
         <div className="booking-header">
-          <span className="booking-label">STAYNEST RESERVATIONS</span>
+          <span className="booking-label">
+            STAYNEST RESERVATIONS
+          </span>
+
           <h1>Book Your Stay</h1>
-          <p>Complete your details and reserve your perfect getaway.</p>
+
+          <p>
+            Complete your details and reserve your perfect getaway.
+          </p>
         </div>
 
+        {/* Hotel Details */}
         <div className="booking-hotel-summary">
+
           <div>
             <h2>{hotel.name}</h2>
             <p>📍 {hotel.location}</p>
@@ -218,12 +288,21 @@ function Booking() {
             <strong>₹{hotel.price}</strong>
             <span>/ night</span>
           </div>
+
         </div>
 
-        <form className="booking-form" onSubmit={handleBooking}>
+        {/* Booking Form */}
+        <form
+          className="booking-form"
+          onSubmit={handleBooking}
+        >
 
+          {/* Name */}
           <div className="booking-field">
-            <label htmlFor="guestName">Full Name</label>
+            <label htmlFor="guestName">
+              Full Name
+            </label>
+
             <input
               id="guestName"
               type="text"
@@ -234,17 +313,25 @@ function Booking() {
             />
           </div>
 
+          {/* Dates */}
           <div className="booking-date-grid">
+
             <div className="booking-field">
-              <label htmlFor="checkIn">Check-in Date</label>
+              <label htmlFor="checkIn">
+                Check-in Date
+              </label>
+
               <input
                 id="checkIn"
                 type="date"
                 min={getToday()}
                 value={checkIn}
                 onChange={(e) => {
-                  setCheckIn(e.target.value);
-                  if (checkOut && e.target.value >= checkOut) {
+                  const selectedDate = e.target.value;
+
+                  setCheckIn(selectedDate);
+
+                  if (checkOut && selectedDate >= checkOut) {
                     setCheckOut("");
                   }
                 }}
@@ -253,7 +340,10 @@ function Booking() {
             </div>
 
             <div className="booking-field">
-              <label htmlFor="checkOut">Check-out Date</label>
+              <label htmlFor="checkOut">
+                Check-out Date
+              </label>
+
               <input
                 id="checkOut"
                 type="date"
@@ -263,12 +353,14 @@ function Booking() {
                 required
               />
             </div>
+
           </div>
 
           <div className="booking-date-hint">
             Select your dates to check room availability.
           </div>
 
+          {/* Availability */}
           {checkingAvailability && (
             <div className="availability-box checking">
               Checking available rooms...
@@ -278,7 +370,9 @@ function Booking() {
           {!checkingAvailability && availableRooms !== null && (
             <div
               className={`availability-box ${
-                availableRooms > 0 ? "available" : "unavailable"
+                availableRooms > 0
+                  ? "available"
+                  : "unavailable"
               }`}
             >
               {availableRooms > 0
@@ -287,9 +381,14 @@ function Booking() {
             </div>
           )}
 
+          {/* Guests and Rooms */}
           <div className="booking-date-grid">
+
             <div className="booking-field">
-              <label htmlFor="guests">Number of Guests</label>
+              <label htmlFor="guests">
+                Number of Guests
+              </label>
+
               <input
                 id="guests"
                 type="number"
@@ -301,7 +400,10 @@ function Booking() {
             </div>
 
             <div className="booking-field">
-              <label htmlFor="rooms">Number of Rooms</label>
+              <label htmlFor="rooms">
+                Number of Rooms
+              </label>
+
               <input
                 id="rooms"
                 type="number"
@@ -312,22 +414,31 @@ function Booking() {
                 required
               />
             </div>
+
           </div>
 
+          {/* Error */}
           {error && (
-            <div className="booking-error">{error}</div>
+            <div className="booking-error">
+              {error}
+            </div>
           )}
 
+          {/* Confirm Button */}
           <button
             type="submit"
             className="confirm-booking-btn"
             disabled={cannotBook}
           >
-            {submitting ? "Confirming..." : "Confirm Booking"}
+            {submitting
+              ? "Confirming..."
+              : "Confirm Booking"}
           </button>
 
         </form>
+
       </div>
+
     </div>
   );
 }
