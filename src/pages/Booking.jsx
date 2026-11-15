@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
@@ -16,13 +17,9 @@ function calculateAvailableRooms(totalRooms, bookings, checkIn, checkOut) {
   const bookedRooms = bookings
     .filter((booking) => {
       if (booking.status === "cancelled") return false;
-
-      // Checkout date is exclusive: same-day checkout/check-in is allowed.
       return booking.checkIn < checkOut && booking.checkOut > checkIn;
     })
-    .reduce((total, booking) => {
-      return total + Number(booking.rooms || 1);
-    }, 0);
+    .reduce((total, booking) => total + Number(booking.rooms || 1), 0);
 
   return Math.max(0, Number(totalRooms || 0) - bookedRooms);
 }
@@ -44,7 +41,6 @@ function Booking() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  // Load hotel information
   useEffect(() => {
     async function fetchHotel() {
       try {
@@ -62,7 +58,6 @@ function Booking() {
     fetchHotel();
   }, [id]);
 
-  // Check room availability for selected dates
   useEffect(() => {
     if (!hotel || !checkIn || !checkOut || checkOut <= checkIn) {
       setAvailableRooms(null);
@@ -85,20 +80,15 @@ function Booking() {
           checkOut
         );
 
-        if (active) {
-          setAvailableRooms(available);
-        }
+        if (active) setAvailableRooms(available);
       } catch (err) {
         console.error(err);
-
         if (active) {
           setAvailableRooms(null);
           setError("Unable to check room availability. Try again.");
         }
       } finally {
-        if (active) {
-          setCheckingAvailability(false);
-        }
+        if (active) setCheckingAvailability(false);
       }
     }
 
@@ -115,6 +105,11 @@ function Booking() {
 
     if (!hotel) {
       setError("Hotel information is not available.");
+      return;
+    }
+
+    if (!name.trim()) {
+      setError("Please enter your name.");
       return;
     }
 
@@ -141,7 +136,6 @@ function Booking() {
     try {
       setSubmitting(true);
 
-      // Recheck availability before saving the booking
       const response = await api.get(`/bookings?hotelId=${id}`);
 
       const latestAvailable = calculateAvailableRooms(
@@ -196,6 +190,7 @@ function Booking() {
   }
 
   const invalidDates = checkIn && checkOut && checkOut <= checkIn;
+
   const cannotBook =
     submitting ||
     checkingAvailability ||
@@ -206,6 +201,7 @@ function Booking() {
   return (
     <div className="booking-page">
       <div className="booking-container">
+
         <div className="booking-header">
           <span className="booking-label">STAYNEST RESERVATIONS</span>
           <h1>Book Your Stay</h1>
@@ -225,6 +221,7 @@ function Booking() {
         </div>
 
         <form className="booking-form" onSubmit={handleBooking}>
+
           <div className="booking-field">
             <label htmlFor="guestName">Full Name</label>
             <input
@@ -318,9 +315,7 @@ function Booking() {
           </div>
 
           {error && (
-            <div className="booking-error">
-              {error}
-            </div>
+            <div className="booking-error">{error}</div>
           )}
 
           <button
@@ -329,10 +324,8 @@ function Booking() {
             disabled={cannotBook}
           >
             {submitting ? "Confirming..." : "Confirm Booking"}
-            <BookingInvoice booking={booking} />
-
-<BookingQR booking={booking} />
           </button>
+
         </form>
       </div>
     </div>
