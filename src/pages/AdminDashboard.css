@@ -1,0 +1,175 @@
+
+.admin-dashboard {
+  min-height: 100vh;
+  padding: 35px 5%;
+  background: #F3F1E9;
+  color: #151916;
+}
+
+.admin-heading {
+  background: #151916;
+  color: #F3F1E9;
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 28px;
+}
+
+.admin-heading p {
+  color: #8BC49E;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.admin-heading h1 {
+  margin: 10px 0;
+  font-size: 32px;
+}
+
+.admin-heading span {
+  color: #A7B5A9;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 35px;
+}
+
+.admin-stat {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 5px solid #245B45;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.admin-stat span {
+  color: #68756B;
+  font-size: 14px;
+}
+
+.admin-stat h2 {
+  color: #245B45;
+  margin: 12px 0 0;
+  font-size: 27px;
+}
+
+.revenue-stat {
+  background: #245B45;
+  border-left-color: #8BC49E;
+}
+
+.revenue-stat span,
+.revenue-stat h2 {
+  color: white;
+}
+
+.admin-section {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.admin-section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-section-title h2 {
+  color: #245B45;
+}
+
+.admin-section-title span {
+  color: #68756B;
+  font-size: 14px;
+}
+
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #E5E9E4;
+  font-size: 14px;
+}
+
+.admin-table th {
+  background: #EDF2ED;
+  color: #245B45;
+}
+
+.admin-delete-btn {
+  background: #A83D3D;
+  color: white;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.admin-delete-btn:hover {
+  background: #812D2D;
+}
+
+.admin-status {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.admin-status.confirmed {
+  background: #E1F1E5;
+  color: #245B45;
+}
+
+.admin-status.cancelled {
+  background: #FBE5E5;
+  color: #A83D3D;
+}
+
+.admin-loading {
+  text-align: center;
+  padding: 60px;
+}
+
+@media (max-width: 768px) {
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-dashboard {
+    padding: 20px 4%;
+  }
+
+  .admin-heading h1 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-section {
+    padding: 15px;
+  }
+}

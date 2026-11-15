@@ -1,0 +1,110 @@
+
+.checkin-page {
+  min-height: 100vh;
+  background: #f3f1e9;
+  padding: 55px 20px;
+}
+
+.checkin-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.checkin-header h1 {
+  color: #245b45;
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.checkin-header p {
+  color: #718075;
+}
+
+.checkin-card {
+  max-width: 650px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(21, 25, 22, 0.08);
+}
+
+.checkin-card h2 {
+  color: #151916;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+#qr-reader {
+  width: 100%;
+  max-width: 450px;
+  margin: auto;
+  border: 1px solid #dce7dc !important;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#qr-reader button {
+  background: #245b45 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px;
+  padding: 9px 15px !important;
+  cursor: pointer;
+}
+
+#qr-reader select {
+  padding: 8px;
+  border-radius: 5px;
+  margin: 8px;
+}
+
+.checkin-message {
+  padding: 15px;
+  margin-top: 22px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.checkin-message.success {
+  background: #e1f2e5;
+  color: #245b45;
+}
+
+.checkin-message.error {
+  background: #fde5e5;
+  color: #b52d2d;
+}
+
+.checkin-message.warning {
+  background: #fff2d9;
+  color: #8a5b00;
+}
+
+.verified-booking {
+  margin-top: 25px;
+  padding: 20px;
+  background: #f3f1e9;
+  border-radius: 10px;
+}
+
+.verified-booking h3 {
+  color: #245b45;
+  margin-bottom: 15px;
+}
+
+.verified-booking p {
+  margin: 12px 0;
+  color: #343b35;
+}
+
+@media (max-width: 600px) {
+  .checkin-card {
+    padding: 18px;
+  }
+
+  .checkin-header h1 {
+    font-size: 27px;
+  }
+}

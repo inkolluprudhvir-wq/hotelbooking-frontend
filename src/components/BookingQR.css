@@ -1,0 +1,62 @@
+
+.booking-qr-container {
+  margin-top: 12px;
+}
+
+.qr-generate-btn {
+  background: #151916;
+  color: #ffffff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.qr-generate-btn:hover {
+  background: #245b45;
+  transform: translateY(-2px);
+}
+
+.booking-qr-card {
+  margin-top: 18px;
+  padding: 25px;
+  background: #f3f1e9;
+  border: 1px solid #dce7dc;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 340px;
+}
+
+.booking-qr-card h3 {
+  color: #245b45;
+  margin-bottom: 10px;
+}
+
+.booking-qr-card p {
+  color: #59665c;
+  font-size: 13px;
+}
+
+.qr-code {
+  display: inline-block;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.qr-booking-id {
+  font-weight: 700;
+  color: #151916 !important;
+}
+
+.qr-customer-name {
+  font-weight: 600;
+}
+
+.qr-note {
+  font-size: 12px !important;
+  margin-top: 12px;
+}

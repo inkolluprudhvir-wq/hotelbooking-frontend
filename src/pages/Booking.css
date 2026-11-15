@@ -1,0 +1,229 @@
+
+/* STAYNEST BOOKING PAGE */
+
+.booking-page {
+  min-height: 100vh;
+  padding: 45px 20px;
+  background: #f3f1e9;
+  box-sizing: border-box;
+}
+
+.booking-container {
+  max-width: 780px;
+  margin: auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 12px 40px rgba(21, 25, 22, 0.09);
+  box-sizing: border-box;
+}
+
+.booking-header {
+  margin-bottom: 30px;
+}
+
+.booking-label {
+  color: #548267;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.booking-header h1 {
+  color: #151916;
+  font-family: Georgia, serif;
+  font-size: 34px;
+  margin: 12px 0;
+}
+
+.booking-header p {
+  color: #718075;
+  line-height: 1.6;
+}
+
+.booking-hotel-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 22px;
+  margin-bottom: 28px;
+  background: #f6f8f5;
+  border: 1px solid #dce5dd;
+  border-radius: 15px;
+}
+
+.booking-hotel-summary h2 {
+  color: #245b45;
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+.booking-hotel-summary p {
+  color: #718075;
+  margin: 0;
+}
+
+.booking-hotel-price {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.booking-hotel-price strong {
+  display: block;
+  color: #245b45;
+  font-size: 23px;
+}
+
+.booking-hotel-price span {
+  color: #718075;
+  font-size: 13px;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.booking-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.booking-field label {
+  color: #245b45;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.booking-field input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 15px;
+  border: 1px solid #dce5dd;
+  border-radius: 10px;
+  background: #fbfcfa;
+  color: #26352b;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.booking-field input:focus {
+  border-color: #548267;
+  box-shadow: 0 0 0 3px rgba(84, 130, 103, 0.12);
+}
+
+.booking-date-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.booking-date-hint {
+  margin-top: -12px;
+  color: #718075;
+  font-size: 13px;
+}
+
+.availability-box {
+  padding: 15px 18px;
+  border-radius: 11px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.availability-box.checking {
+  background: #f1f3ef;
+  color: #718075;
+  border: 1px solid #dce5dd;
+}
+
+.availability-box.available {
+  background: #edf5ef;
+  color: #245b45;
+  border: 1px solid #c9dfce;
+}
+
+.availability-box.unavailable {
+  background: #fff0ee;
+  color: #a43e36;
+  border: 1px solid #efc5c0;
+}
+
+.booking-error {
+  padding: 14px 17px;
+  background: #fff0ee;
+  border: 1px solid #efc5c0;
+  border-radius: 10px;
+  color: #a43e36;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.confirm-booking-btn {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 8px;
+  background: #245b45;
+  color: #ffffff;
+  border: none;
+  border-radius: 11px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.confirm-booking-btn:hover:not(:disabled) {
+  background: #151916;
+  transform: translateY(-2px);
+}
+
+.confirm-booking-btn:disabled {
+  background: #a7b5a9;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.booking-message {
+  max-width: 700px;
+  margin: 70px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 15px;
+  color: #245b45;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .booking-page {
+    padding: 22px 13px;
+  }
+
+  .booking-container {
+    padding: 23px 18px;
+  }
+
+  .booking-header h1 {
+    font-size: 27px;
+  }
+
+  .booking-date-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-hotel-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .booking-hotel-price {
+    text-align: left;
+  }
+}

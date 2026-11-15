@@ -1,0 +1,126 @@
+.auth-page {
+  min-height: 100vh;
+  background: #151916;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 15px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 38px;
+  background: #202922;
+  border: 1px solid #354b3b;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.auth-logo {
+  color: #f3f1e9;
+  font-family: Georgia, serif;
+  font-size: 27px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.auth-card h2 {
+  color: #f3f1e9;
+  text-align: center;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  margin: 0 0 10px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #aebbb0;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.auth-card label {
+  display: block;
+  color: #dce5dc;
+  font-size: 14px;
+  margin: 15px 0 8px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #425a48;
+  border-radius: 8px;
+  background: #18221b;
+  color: #f3f1e9;
+  outline: none;
+  font-size: 14px;
+}
+
+.auth-card input:focus {
+  border-color: #70aa80;
+  box-shadow: 0 0 0 3px rgba(112, 170, 128, 0.12);
+}
+
+.auth-card input::placeholder {
+  color: #829187;
+}
+
+.auth-card button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  background: linear-gradient(135deg, #347b59, #20543d);
+  border: 1px solid #438765;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-card button:hover {
+  background: #438765;
+  transform: translateY(-2px);
+}
+
+.auth-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-error {
+  padding: 11px;
+  border-radius: 7px;
+  background: #482626;
+  color: #ffbaba;
+  font-size: 13px;
+  text-align: center;
+}
+
+.auth-switch {
+  color: #aebbb0;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 22px;
+}
+
+.auth-switch a {
+  color: #8bc49e;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 25px 20px;
+  }
+}

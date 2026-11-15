@@ -1,0 +1,328 @@
+
+/* =====================================
+   STAYNEST - HOTEL DETAILS PAGE
+   Midnight Black + Emerald + Ivory
+===================================== */
+
+.details-page {
+  width: min(1200px, 92%);
+  margin: 40px auto 60px;
+  background: #ffffff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(21, 25, 22, 0.09);
+  color: #26352b;
+  box-sizing: border-box;
+}
+
+/* HOTEL IMAGE */
+
+.details-image {
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background: #e8eee8;
+}
+
+.details-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.details-image img:hover {
+  transform: scale(1.035);
+}
+
+/* MAIN CONTENT */
+
+.details-content {
+  padding: 38px 44px 45px;
+  box-sizing: border-box;
+}
+
+.details-content h1 {
+  color: #151916;
+  font-family: Georgia, serif;
+  font-size: 34px;
+  margin: 0 0 12px;
+}
+
+.details-content h2 {
+  color: #151916;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  margin: 30px 0 18px;
+}
+
+/* LOCATION */
+
+.details-location {
+  color: #718075;
+  font-size: 16px;
+  margin: 10px 0 16px;
+}
+
+/* RATING */
+
+.details-rating {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px;
+  background: #edf5ef;
+  color: #245b45;
+  border: 1px solid #c9dfce;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 5px 0 12px;
+}
+
+/* PRICE */
+
+.details-price {
+  color: #245b45 !important;
+  font-size: 30px !important;
+  margin: 12px 0 25px !important;
+}
+
+.details-price span {
+  color: #718075;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* DIVIDER */
+
+.details-content hr {
+  border: none;
+  border-top: 1px solid #dce5dd;
+  margin: 25px 0;
+}
+
+/* DESCRIPTION */
+
+.details-description {
+  color: #718075;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+/* INFORMATION GRID */
+
+.details-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 22px 0 35px;
+}
+
+.details-info-grid > div {
+  padding: 24px;
+  min-height: 110px;
+  background: #f6f8f5;
+  border: 1px solid #dce5dd;
+  border-radius: 16px;
+  box-sizing: border-box;
+  transition: 0.3s ease;
+}
+
+.details-info-grid > div:hover {
+  background: #edf5ef;
+  border-color: #8bc49e;
+  transform: translateY(-3px);
+}
+
+.details-info-grid strong {
+  display: block;
+  color: #245b45;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.details-info-grid p {
+  color: #26352b;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* AMENITIES */
+
+.amenities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin: 22px 0 35px;
+}
+
+.amenities-list span {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 19px;
+  background: #edf5ef;
+  color: #245b45;
+  border: 1px solid #c9dfce;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.amenities-list span:hover {
+  background: #245b45;
+  color: #ffffff;
+  border-color: #245b45;
+  transform: translateY(-3px);
+}
+
+.amenities-list p {
+  color: #718075;
+}
+
+/* ACTION BUTTONS */
+
+.details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+/* BACK BUTTON */
+
+.back-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px;
+  padding: 15px 25px;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #245b45;
+  border: 1.5px solid #245b45;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #245b45;
+  color: #ffffff;
+}
+
+/* BOOK NOW BUTTON */
+
+.details-book-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px;
+  padding: 15px 25px;
+  box-sizing: border-box;
+  background: #245b45;
+  color: #ffffff;
+  border: 1.5px solid #245b45;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(36, 91, 69, 0.18);
+  transition: 0.3s ease;
+}
+
+.details-book-btn:hover {
+  background: #151916;
+  border-color: #151916;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+/* LOADING AND ERROR */
+
+.details-message {
+  width: min(800px, 90%);
+  margin: 80px auto;
+  padding: 35px;
+  text-align: center;
+  color: #245b45;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(21, 25, 22, 0.08);
+  box-sizing: border-box;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+  .details-page {
+    width: 94%;
+    margin: 22px auto 40px;
+    border-radius: 16px;
+  }
+
+  .details-image {
+    height: 260px;
+  }
+
+  .details-content {
+    padding: 25px 22px 30px;
+  }
+
+  .details-content h1 {
+    font-size: 27px;
+  }
+
+  .details-content h2 {
+    font-size: 22px;
+  }
+
+  .details-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-info-grid > div {
+    min-height: auto;
+  }
+
+  .details-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .back-btn,
+  .details-book-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .details-image {
+    height: 210px;
+  }
+
+  .details-content {
+    padding: 20px 16px 25px;
+  }
+
+  .details-content h1 {
+    font-size: 24px;
+  }
+
+  .amenities-list {
+    gap: 9px;
+  }
+
+  .amenities-list span {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+}
